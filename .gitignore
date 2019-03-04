@@ -1,0 +1,5 @@
+composer.lock
+phpunit.xml
+/nbproject/
+/vendor/
+/tests/coverage/
