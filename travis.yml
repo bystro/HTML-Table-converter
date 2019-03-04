@@ -1,0 +1,34 @@
+language: php
+dist: trusty
+cache:
+    directories:
+        - vendor
+php:    
+    - 7
+    - 7.1
+    - 7.2    
+    - nightly
+env:
+    matrix:
+        - COMPOSER_PREFER=""
+        - COMPOSER_PREFER="--prefer-stable"
+        - COMPOSER_PREFER="--prefer-lowest --prefer-stable"
+matrix:
+    allow_failures:
+        -
+            php: nightly
+    fast_finish: true
+before_script:
+    - >-
+        echo 'always_populate_raw_post_data = -1' >> ~/.phpenv/versions/$(phpenv
+        version-name)/etc/conf.d/travis.ini
+    - |
+        if [ ! $(php -m | grep -ci xdebug) -eq 0 ] ; then
+            phpenv config-rm xdebug.ini
+        fi
+    - composer global require hirak/prestissimo
+    - composer update $COMPOSER_PREFER
+    - |        
+    - 'php -S 127.0.0.1:8888 -t "$TRAVIS_BUILD_DIR/www" &> /dev/null &'
+script:    
+    - vendor/bin/phpunit
