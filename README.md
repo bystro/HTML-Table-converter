@@ -26,12 +26,12 @@ Given we have table bellow
     <tr>
       <td>Jill</td>
       <td>Smith</td>
-      <td>50</td>
+      <td><b>50</b></td>
     </tr>
     <tr>
       <td>Eve</td>
       <td>Jackson</td>
-      <td>94</td>
+      <td><b>94</b></td>
     </tr>
   </tbody>
 </table>
@@ -64,7 +64,7 @@ array(3) {
     'Last name' =>
     string(5) "Smith"
     'Points' =>
-    string(2) "50"
+    string(9) "<b>50</b>"
   }
   [2] =>
   array(3) {
@@ -73,12 +73,105 @@ array(3) {
     'Last name' =>
     string(7) "Jackson"
     'Points' =>
-    string(2) "94"
+    string(9) "<b>94</b>"
   }
 }
 ```
 
-Output format supported:
+#### Stripping HTML tags from column values 
+```php
+<?php
+
+$converter = HtmlTableConverter\HtmlTableConverterFactory::fromHtml($tableHtml);
+$converter->stripTagsFromColumnValues();
+var_dump($converter->convert()); 
+
+```
+```diff
+array(3) {
+  [0] =>
+  array(3) {
+    [0] =>
+    string(10) "First name"
+    [1] =>
+    string(9) "Last name"
+    [2] =>
+    string(6) "Points"
+  }
+  [1] =>
+  array(3) {
+    'First name' =>
+    string(4) "Jill"
+    'Last name' =>
+    string(5) "Smith"
+    'Points' =>
+-    string(9) "<b>50</b>"
++    string(2) "50"
+  }
+  [2] =>
+  array(3) {
+    'First name' =>
+    string(3) "Eve"
+    'Last name' =>
+    string(7) "Jackson"
+    'Points' =>
+-    string(9) "<b>94</b>"
++    string(2) "94"
+  }
+}
+```
+
+#### Removing header values
+```php
+<?php
+
+$converter = HtmlTableConverter\HtmlTableConverterFactory::fromHtml($tableHtml);
+$converter->doNotIncludeHeaderRowInResult();
+var_dump($converter->convert()); 
+
+```
+```diff
+array(2) {
+-  [0] =>
+-  array(3) {
+-    [0] =>
+-    string(10) "First name"
+-    [1] =>
+-    string(9) "Last name"
+-    [2] =>
+-    string(6) "Points"
+-  }
+  [0] =>
+  array(3) {
+    'First name' =>
+    string(4) "Jill"
+    'Last name' =>
+    string(5) "Smith"
+    'Points' =>
+    string(9) "<b>50</b>"
+  }
+  [1] =>
+  array(3) {
+    'First name' =>
+    string(3) "Eve"
+    'Last name' =>
+    string(7) "Jackson"
+    'Points' =>
+    string(9) "<b>94</b>"
+  }
+}
+```
+
+#### Converting to JSON
+```php
+<?php
+
+$converter = HtmlTableConverter\HtmlTableConverterFactory::fromHtml($tableHtml);
+$converter->convert(\HtmlTableConverter\Converter\Type::JSON);
+
+```
+
+### Output format supported:
 * array
 * json
 
