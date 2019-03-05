@@ -23,8 +23,13 @@ class HtmlTableConverter
     }
 
     public function doNotIncludeHeaderRowInResult()
+    {        
+        $this->converter->setIncludeHeaderRowInResult(false);
+    }
+
+    public function stripTagsFromColumnValues()
     {
-        $this->converter->doNotIncludeHeaderRowInResult();
+        $this->converter->setStripTagsFromColumnValues(true);
     }
 
     public function setResultType($resultType)

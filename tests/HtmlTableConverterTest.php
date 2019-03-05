@@ -31,11 +31,15 @@ final class HtmlTableConverterTest extends TestCase
         . '<tbody>'
         . '<tr>'
         . '<td>Red Sox</td>'
-        . '<td>AL East</td>'
+        . '<td>'
+        . '<b>AL East</b>'
+        . '</td>'
         . '</tr>'
         . '<tr>'
         . '<td>Cleveland Indians</td>'
-        . '<td>AL Central</td>'
+        . '<td>'
+        . '<b>AL Central</b>'
+        . '</td>'
         . '</tr>'
         . '</tbody>'
         . '</table>';
@@ -82,11 +86,11 @@ final class HtmlTableConverterTest extends TestCase
             ],
             [
                 'col0' => 'Red Sox',
-                'col1' => 'AL East',
+                'col1' => '<b>AL East</b>',
             ],
             [
                 'col0' => 'Cleveland Indians',
-                'col1' => 'AL Central',
+                'col1' => '<b>AL Central</b>',
             ],
         ];
 
@@ -102,6 +106,32 @@ final class HtmlTableConverterTest extends TestCase
         $tableId = 'teams';
         $converter = HtmlTableConverter\HtmlTableConverterFactory::fromHtml($html, $tableId);
         $converter->doNotIncludeHeaderRowInResult();
+        $actual = $converter->convert();
+
+        $expected = [
+            [
+                'col0' => 'Red Sox',
+                'col1' => '<b>AL East</b>',
+            ],
+            [
+                'col0' => 'Cleveland Indians',
+                'col1' => '<b>AL Central</b>',
+            ],
+        ];
+
+        $this->assertEquals(
+            $actual,
+            $expected
+        );
+    }
+    
+    public function testConvertingTableToArrayStrippingColumnValues()
+    {
+        $html = self::HTML;
+        $tableId = 'teams';
+        $converter = HtmlTableConverter\HtmlTableConverterFactory::fromHtml($html, $tableId);
+        $converter->doNotIncludeHeaderRowInResult();
+        $converter->stripTagsFromColumnValues();
         $actual = $converter->convert();
 
         $expected = [
@@ -195,11 +225,11 @@ final class HtmlTableConverterTest extends TestCase
         $expected = json_encode([
             [
                 'col0' => 'Red Sox',
-                'col1' => 'AL East',
+                'col1' => '<b>AL East</b>',
             ],
             [
                 'col0' => 'Cleveland Indians',
-                'col1' => 'AL Central',
+                'col1' => '<b>AL Central</b>',
             ],
         ]);
 
@@ -208,6 +238,8 @@ final class HtmlTableConverterTest extends TestCase
             $expected
         );
     }
+    
+    
 
     public function testGettingJsonFromTableWithItsIdFromHtmlCodeFailure()
     {
@@ -217,4 +249,6 @@ final class HtmlTableConverterTest extends TestCase
         $tableId = 'id_that_does_not_exits';
         HtmlTableConverter\HtmlTableConverterFactory::fromHtml($html, $tableId);
     }
+    
+        
 }

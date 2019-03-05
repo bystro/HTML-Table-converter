@@ -61,15 +61,32 @@ class HtmlTableProcessor
             if (!$columnNodeList->length) {
                 continue;
             }
+            
             $columnValues = [];
             $columnNumber = 0;
             foreach ($columnNodeList as $columnNodeElement) {
+                
                 $headerKey = $this->headerValues[0][$columnNumber] ?? self::HEADER_KEY_NAME_PREFIX . $columnNumber;
-                $columnValues[$headerKey] = trim($columnNodeElement->textContent);
+
+                $columnValues[$headerKey] = $this->getInnerHTML($columnNodeElement);
 
                 $columnNumber++;
             }
+            
             $this->columnValues[] = $columnValues;
         }
     }
+
+    function getInnerHTML(\DOMElement $element): string
+    {
+        $innerHTML = '';
+        $children = $element->childNodes;
+
+        foreach ($children as $child) {
+            $innerHTML .= $element->ownerDocument->saveHTML($child);
+        }
+
+        return trim($innerHTML);
+    }
+    
 }

@@ -55,11 +55,11 @@ final class HtmlTableProcessorTest extends TestCase
         $expected = [
             [
                 'Team name' => 'Red Sox',
-                'Conference name' => 'AL East',
+                'Conference name' => '<b>AL East</b>',
             ],
             [
                 'Team name' => 'Cleveland Indians',
-                'Conference name' => 'AL Central',
+                'Conference name' => '<b>AL Central</b>',
             ],
         ];
 
