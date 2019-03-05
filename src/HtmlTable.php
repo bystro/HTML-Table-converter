@@ -22,6 +22,7 @@ class HtmlTable
     private function extractTable($html)
     {
         $htmlDomDocument = new \DOMDocument();
+        libxml_use_internal_errors(true);
         $htmlDomDocument->loadHTML($html);
 
         if ($this->tableId) {

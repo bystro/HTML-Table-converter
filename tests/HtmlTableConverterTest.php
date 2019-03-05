@@ -120,11 +120,11 @@ final class HtmlTableConverterTest extends TestCase
             $expected
         );
     }
-    
-    /*public function testConvertingTableToArrayFromUrl()
+
+    public function testConvertingTableToArrayFromUrl()
     {
-        $url = 'https://www.w3schools.com/html/html_tables.asp';
-        $tableId = 'customers';
+        $url = 'https://github.com/bystro/HTML-Table-converter/tree/master';
+        $tableId = 'user-content-points';
         $converter = HtmlTableConverter\HtmlTableConverterFactory::fromUrl($url, $tableId);
         $actual = $converter->convert();
 
@@ -150,7 +150,7 @@ final class HtmlTableConverterTest extends TestCase
             $actual,
             $expected
         );
-    }*/
+    }
 
     public function testConvertingTableToJson()
     {
