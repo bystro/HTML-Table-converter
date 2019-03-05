@@ -83,4 +83,15 @@ Output format supported:
 * json
 
 ### Install
-TBD
+
+#### Composer
+In command line
+```
+composer require bystro/html-table-converter
+```
+or composer.json
+```
+"require": {       
+    "bystro/html-table-converter": "^1.0"
+}
+```
