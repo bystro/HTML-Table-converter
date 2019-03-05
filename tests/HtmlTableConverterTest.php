@@ -167,12 +167,12 @@ final class HtmlTableConverterTest extends TestCase
             [
                 'First name' => 'Jill',
                 'Last name' => 'Smith',
-                'Points' => '50',
+                'Points' => '<b>50</b>',
             ],
             [
                 'First name' => 'Eve',
                 'Last name' => 'Jackson',
-                'Points' => '94',
+                'Points' => '<b>94</b>',
             ],
         ];
 
