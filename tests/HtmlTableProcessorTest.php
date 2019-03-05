@@ -8,18 +8,26 @@ final class HtmlTableProcessorTest extends TestCase
     const HTML = '<table summary="Documents" id="teams" title="Team list">'
         . '<thead>'
         . '<tr>'
-        . '<th>Team name</th>'
-        . '<th>Conference name</th>'
+        . '<th>'
+        . PHP_EOL . '<a href="sorting=asc">Team name</a>' . PHP_EOL
+        . '</th>'
+        . '<th>'
+        . PHP_EOL . 'Conference name' . PHP_EOL
+        . '</th>'
         . '</tr>'
         . '</thead>'
         . '<tbody>'
         . '<tr>'
         . '<td>Red Sox</td>'
-        . '<td>AL East</td>'
+        . '<td>'
+        . PHP_EOL . '<b>AL East</b>' . PHP_EOL
+        . '</td>'
         . '</tr>'
         . '<tr>'
         . '<td>Cleveland Indians</td>'
-        . '<td>AL Central</td>'
+        . '<td>'
+        . PHP_EOL . '<b>AL Central</b>' . PHP_EOL
+        . '</td>'
         . '</tr>'
         . '</tbody>'
         . '</table>';

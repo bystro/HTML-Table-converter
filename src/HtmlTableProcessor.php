@@ -43,7 +43,7 @@ class HtmlTableProcessor
 
         $headerValues = [];
         foreach ($headerNodeList as $headerNodeElement) {
-            $headerValues[] = $headerNodeElement->textContent;
+            $headerValues[] = trim($headerNodeElement->textContent);
         }
         $this->headerValues[] = $headerValues;
     }
@@ -65,7 +65,7 @@ class HtmlTableProcessor
             $columnNumber = 0;
             foreach ($columnNodeList as $columnNodeElement) {
                 $headerKey = $this->headerValues[0][$columnNumber] ?? self::HEADER_KEY_NAME_PREFIX . $columnNumber;
-                $columnValues[$headerKey] = $columnNodeElement->textContent;
+                $columnValues[$headerKey] = trim($columnNodeElement->textContent);
 
                 $columnNumber++;
             }
