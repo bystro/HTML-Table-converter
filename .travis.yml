@@ -5,8 +5,7 @@ cache:
         - vendor
 php:    
     - 7
-    - 7.1
-    - 7.2    
+    - 8
     - nightly
 env:
     matrix:
