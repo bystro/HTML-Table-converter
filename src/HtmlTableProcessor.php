@@ -1,9 +1,9 @@
 <?php
+
 namespace HtmlTableConverter;
 
 class HtmlTableProcessor
 {
-
     const HEADER_KEY_NAME_PREFIX = 'col';
 
     private $html = '';
@@ -17,12 +17,12 @@ class HtmlTableProcessor
         $this->process();
     }
 
-    public function getHeaderValues()
+    public function getHeaderValues(): array
     {
         return $this->headerValues;
     }
 
-    public function getColumnValues()
+    public function getColumnValues(): array
     {
         return $this->columnValues;
     }
