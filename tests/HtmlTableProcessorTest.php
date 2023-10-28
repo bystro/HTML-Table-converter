@@ -44,7 +44,7 @@ final class HtmlTableProcessorTest extends TestCase
             ],
         ];
 
-        $this->assertAttributeSame($expected, 'headerValues', $table);
+        $this->assertEquals($expected, $table->getHeaderValues());
     }
 
     public function testProcessingTableColumnValues()
@@ -63,6 +63,6 @@ final class HtmlTableProcessorTest extends TestCase
             ],
         ];
 
-        $this->assertAttributeSame($expected, 'columnValues', $table);
+        $this->assertEquals($expected, $table->getColumnValues());
     }
 }
